@@ -27,10 +27,21 @@ app.get('/',(req,res)=>{
 })
 
 
-app.use('/api/books',books_routes)
+app.use('/books',books_routes)
+//error handling 
+app.use ((err,req,res,next)=>{
+    console.error(err)
+    if(err.name === 'ValidationError')res.status(400)
+    else if(err.name === 'Cast Error')res.status(400)
+    console.log(err.message)
+    res.json({error :err.message })
+})
 
+//Unknown Path
+app.use((req,res)=>{
+    res.status(404).json({error : "path not found"})
 
-
+})
 
 app.listen(port,()=>{
     console.log(`server is runing at port  ${port}`)
