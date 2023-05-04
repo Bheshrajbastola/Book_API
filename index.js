@@ -2,13 +2,13 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const books_routes = require ('./routes/book-routes')
+const user_routes = require ('./routes/user-routes')
 
-const user = require('./data/user')
 
 // reading .env file
 const port =process.env.PORT
 
-mongoose.connect('mongodb+srv://swikarbaastola:yYUPXkcPs6pF2Zmo@cluster0.gjyirme.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://swikarbaastola:h5mEXRkt6AwB3A0V@cluster0.hxzvnhr.mongodb.net/?retryWrites=true&w=majority')
 .then(()=>{
     console.log("Database Connected")
 })
@@ -26,8 +26,10 @@ app.get('/',(req,res)=>{
 
 })
 
+app.use('/users',user_routes)
 
 app.use('/books',books_routes)
+
 //error handling 
 app.use ((err,req,res,next)=>{
     console.error(err)
