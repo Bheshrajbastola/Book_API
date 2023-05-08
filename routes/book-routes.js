@@ -1,8 +1,8 @@
 
 const express = require('express')
 const router = express .Router()
-const Book = require('../model/book');
-const book = require('../model/book');
+const Book = require ('../model/book')
+
 
 const bookController = require ('../controllers/book-contoller')
 const reviewController = require ('../controllers/review-controller')

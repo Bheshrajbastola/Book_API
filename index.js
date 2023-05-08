@@ -3,10 +3,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 const books_routes = require ('./routes/book-routes')
 const user_routes = require ('./routes/user-routes')
+ const { verifyUser } = require('./middleware/auth')
 
 
 // reading .env file
 const port =process.env.PORT
+
 
 mongoose.connect('mongodb+srv://swikarbaastola:h5mEXRkt6AwB3A0V@cluster0.hxzvnhr.mongodb.net/?retryWrites=true&w=majority')
 .then(()=>{
@@ -26,9 +28,10 @@ app.get('/',(req,res)=>{
 
 })
 
-app.use('/users',user_routes)
+ app.use('/users',  user_routes)
+// app.use (verifyUser)
 
-app.use('/books',books_routes)
+app.use('/books', verifyUser,  books_routes)
 
 //error handling 
 app.use ((err,req,res,next)=>{
