@@ -5,18 +5,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 
 
-// Get user by username
-// router.get('/:username', (req, res, next) => {
-//   User.findOne({ username: req.params.username })
-//     .then((user) => {
-//       if (!user) {
-//         return res.status(404).json({ error: 'User not found' })
-//       }
-//       res.json(user)
-//     })
-//     .catch(next)
-// })
-
 // // // Get all users
 router.get('/', (req, res, next) => {
   User.find()
@@ -46,35 +34,6 @@ router.post('/register', (req, res, next) => {
 
 
 
-// // Update user by username
-// router.put('/:username', (req, res, next) => {
-//     const { fullname, email, password } = req.body
-//     bcrypt.hash(password, 10, (err, hash) => {
-//       if (err) return res.status(500).json({ error: err.message })
-//       User.findOneAndUpdate(
-//         { username: req.params.username },
-//         { fullname, email, password: hash },
-//         { new: true }
-//       )
-//         .then((user) => {
-//           if (!user) {
-//             return res.status(404).json({ error: 'User not found' })
-//           }
-//           res.json(user)
-//         })
-//         .catch(next)
-//     })
-//   })
-
-// // // Delete user by username
-// router.delete('/:username', (req, res, next) => {
-//   User.findOneAndDelete({ username: req.params.username })
-//     .then((user) => {
-//       if (!user) {
-//         return res.status(404).json({ error: 'User not found' })
-//       }
-//       res.json(user)
-//     }).catch(next)
 
 
 
@@ -91,7 +50,10 @@ router.post('/register', (req, res, next) => {
 
           const payload ={
             id:user.id,
-            username:user.username
+            username:user.username,
+            fullName: user.fullName,
+            role : user.role,
+            
           }
 
           jwt.sign(payload,process.env.SECRET,

@@ -6,6 +6,7 @@ const Book = require ('../model/book')
 
 const bookController = require ('../controllers/book-contoller')
 const reviewController = require ('../controllers/review-controller')
+const { verifyAdmin } = require('../middleware/auth')
 
 // this is main route for /api/books
 router.route('/')
@@ -28,14 +29,14 @@ router.route('/')
 
     // add a book in the books list
 
-    .post(bookController.createBooks)
+    .post(verifyAdmin, bookController.createBooks)
 
     .put((req, res, next) => {
         res.status(405).json({ "error": "PUT request is not allowed" });
     })
 
 
-    .delete(bookController.deleteAllBooks)
+    .delete(verifyAdmin, bookController.deleteAllBooks)
 
 
 // path for /api/books/:book_id
@@ -90,3 +91,9 @@ router.route('/:book_id')
 
 // export it to use in other file
 module.exports = router;
+
+
+
+
+
+

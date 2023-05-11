@@ -9,7 +9,7 @@ const getAllBooks = (req, res , next) => {
 
 
 const createBooks = (req,res,next)=>{
-    Book.create()
+    Book.create(req.body)
     .then(books => res.json(books))
     .catch (next)
 }

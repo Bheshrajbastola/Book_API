@@ -3,7 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const books_routes = require ('./routes/book-routes')
 const user_routes = require ('./routes/user-routes')
- const { verifyUser } = require('./middleware/auth')
+ const { verifyUser   } = require('./middleware/auth')
 
 
 // reading .env file

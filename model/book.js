@@ -6,10 +6,10 @@ const reviewSchema = new mongoose.Schema({
     required:true,
     minLength:10
   },
-  user:{
-    type : mongoose.Schema.Types.ObjectId,
-    ref :'User'
-  }
+  // user:{
+  //   type : mongoose.Schema.Types.ObjectId,
+  //   ref :'User'
+  // }
 
 })
 

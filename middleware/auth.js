@@ -32,9 +32,18 @@ const verifyUser = (req, res, next) =>{
          // move to the destined endpoint
     next();
     });
-   
 
 }
 
+const verifyAdmin = (req,res,next)=>{
+    if(req.user.role !== 'admin'){
+        return res.status (403).json ({error : 'you are not a admin'})
 
-module.exports = {verifyUser};
+    }else if(req.user.role === 'admin') 
+        next()
+
+    
+}
+
+
+module.exports = {verifyUser,verifyAdmin};
